@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class IObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public bool seen;
+    public bool visible;
+
+
+    private void OnBecameVisible() {
+        seen = true;
+        visible = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnBecameInvisible() {
+        visible = false;
     }
 }

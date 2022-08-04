@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class o_key : IObject
 {
-    
+    public void get() {
+        StartCoroutine(Player.Instance.goToAndGetSomething(gameObject));
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 //只用于从直播间读入数据并直接调用相应的处理方法？
 public class Receiver : MonoBehaviour {
-    [SerializeField] private Image headImage;
+    [SerializeField] private Image headImage = null;
     [SerializeField] private int roomID;
     private IBiliBiliLiveRequest req;
 
@@ -32,12 +32,12 @@ public class Receiver : MonoBehaviour {
 
     private void OnDanmu(BiliBiliLiveDanmuData obj) {
         Debug.Log($"<color=#00aaff>弹幕</color> {obj.username} {obj.content} {obj.guardLevel}");
-        
-        //if (AnalyzeMangager.Instance.Analyze()) {
-        //    //弹幕被成功执行了
-        //    //todo 将弹幕通过弹窗展示在游戏中，并且有发送者的头像，该观众参与游戏的次数等的展示，甚至可以根据礼物数获得头像框什么的
-            
-        //}
+
+        if (AnalyzeManager.Instance.Analyze(obj.content)) {
+            //弹幕被成功执行了
+            //todo 将弹幕通过弹窗展示在游戏中，并且有发送者的头像，该观众参与游戏的次数等的展示，甚至可以根据礼物数获得头像框什么的
+            Debug.Log("这是个可解析指令");
+        }
     }
 
     private void OnRoomViewer(int obj) {
@@ -48,7 +48,7 @@ public class Receiver : MonoBehaviour {
         req.DisConnect();
     }
 
-    private void OnDestroy() {
-        OnApplicationQuit();
-    }
+    //private void OnDestroy() {
+    //    OnApplicationQuit();
+    //}
 }
